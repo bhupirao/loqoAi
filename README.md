@@ -1,79 +1,35 @@
 # Loqoai Assignment Project
 
-This is a project for a Spring Boot application that manages products using a MySQL database. It includes a RESTful API for filtering and sorting product records based on specified parameters.
+## REST API for Product Management
 
-## Prerequisites
+We have developed this REST API for managing products. This API provides functionality to filter and sort product records using various criteria.
 
-- Java 17
-- Maven
+## Modules
+
+- Product Management Module
+
+## Features
+
+- **Product Management Features:**
+  - Add a new product to the system.
+  - Retrieve products with filtering and sorting capabilities based on category, price range, stock availability, and other criteria.
+
+## Tech Stack
+
+- Java
+- Spring Framework
+- Spring Boot
+- Spring Data JPA
 - MySQL
-
-## Getting Started
-
-1. **Clone the repository:**
-    ```sh
-    git clone https://github.com/your-repo/loqoai-demo.git
-    cd loqoai-demo
-    ```
-
-2. **Configure the database:**
-   Create a MySQL database and update the `application.properties` file with your database details:
-    ```properties
-    spring.datasource.url=jdbc:mysql://localhost:3306/your-database
-    spring.datasource.username=your-username
-    spring.datasource.password=your-password
-    spring.jpa.hibernate.ddl-auto=update
-    spring.jpa.show-sql=true
-    ```
-
-3. **Build the application:**
-    ```sh
-    mvn clean install
-    ```
-
-4. **Run the application:**
-    ```sh
-    mvn spring-boot:run
-    ```
-
-
-This will start the Spring Boot application and make the RESTful API available at http://localhost:8080.
-Run Tests
-To run the unit tests, use the following command:
-mvn test
-This will execute all the unit tests in the src/test/java directory and provide a test report in the console.
-
-## Project Structure
-src
-├── main
-│   ├── java
-│   │   └── com
-│   │       └── loqoai
-│   │           ├── Model
-│   │           │   └── Product.java
-│   │           ├── Repository
-│   │           │   └── ProductRepo.java
-│   │           └── Service
-│   │               └── ProductService.java
-│   └── resources
-│       └── application.properties
-└── test
-    └── java
-        └── com
-            └── loqoai
-                └── Service
-                    └── ProductServiceTest.java
-
+- Lombok
 
 ## API Endpoints
-
 ### Add a Product
 
-**Request:**
-```http
 POST /products
 Content-Type: application/json
 
+Request:
 {
   "name": "Product1",
   "category": "Category1",
@@ -81,12 +37,30 @@ Content-Type: application/json
   "inStock": true,
   "rating": 4.5
 }
-### Get Product
-Get Products with Filtering and Sorting
+
+Response:
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Product1",
+  "category": "Category1",
+  "price": 10.0,
+  "inStock": true,
+  "rating": 4.5,
+  "createdAt": "2023-07-20T12:34:56.789+00:00"
+}
+
+## Get Products with Filtering and Sorting
+
 Request:
+
 GET /products?category=electronics&minPrice=100&maxPrice=1000&inStock=true&sortField=price&sortOrder=asc
 
 Response:
+
 HTTP/1.1 200 OK
 Content-Type: application/json
 
@@ -111,13 +85,68 @@ Content-Type: application/json
   }
 ]
 
+## Project Structure
 
-## Dependencies
-### The project relies on the following dependencies:
+src
+├── main
+│   ├── java
+│   │   └── com
+│   │       └── loqoai
+│   │           ├── Model
+│   │           │   └── Product.java
+│   │           ├── Repository
+│   │           │   └── ProductRepo.java
+│   │           └── Service
+│   │               └── ProductService.java
+│   └── resources
+│       └── application.properties
+└── test
+    └── java
+        └── com
+            └── loqoai
+                └── Service
+                    └── ProductServiceTest.java
 
-Spring Boot Starter Web
-Spring Boot Starter Data JPA
-MySQL Connector Java
-Lombok
-Spring Boot Starter Test
-Mockito
+
+
+
+## Contributors
+
+- <a href="https://github.com/bhupirao">Bhoop Singh</a>
+
+## Installation and Run
+
+### Clone the repository:
+
+git clone https://github.com/your-repo/loqoai-demo.git
+cd loqoai-demo
+
+### Build the application:
+
+mvn clean install
+
+### Run the application:
+
+mvn spring-boot:run
+
+### Run Tests
+
+mvn test
+
+
+### Update Database Configuration
+
+Before running the API server, update the database configuration inside the `application.properties` file with your database details:
+
+```properties
+server.port=8080
+
+spring.datasource.url=jdbc:mysql://localhost:3306/your-database
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.username=your-username
+spring.datasource.password=your-password
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+   '''
+
